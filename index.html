@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Report Bekasi Team - September 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background: #1a1a2e;
+        }
+
+        .presentation-wrapper {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slides-container {
+            display: flex;
+            height: 100vh;
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .slide {
+            min-width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 80px;
+            position: relative;
+        }
+
+        /* Slide 1 - Title */
+        .slide-1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .title-content {
+            text-align: center;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .main-title {
+            font-size: 64px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 32px;
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 15px;
+        }
+
+        .date-info {
+            font-size: 24px;
+            opacity: 0.85;
+            font-weight: 300;
+        }
+
+        /* Content Slides */
+        .slide-2, .slide-3, .slide-4, .slide-5, .slide-6, .slide-7, .slide-8, .slide-9, .slide-10, .slide-11, .slide-12, .slide-13, .slide-14, .slide-15, .slide-16 {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .slide-header {
+            width: 100%;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .slide-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .slide-subtitle {
+            font-size: 18px;
+            color: #718096;
+        }
+
+        .content-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Cards */
+        .info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px 28px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid;
+            animation: slideInLeft 0.8s ease;
+        }
+
+        .card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .card.jatibening {
+            border-left-color: #4299e1;
+            animation-delay: 0.2s;
+        }
+
+        .card.summarecon {
+            border-left-color: #48bb78;
+            animation-delay: 0.3s;
+        }
+
+        .card.cikarang {
+            border-left-color: #ed8936;
+            animation-delay: 0.4s;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+
+        .card-metric {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-size: 16px;
+            color: #718096;
+            margin-right: 8px;
+        }
+
+        .metric-value {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .metric-value.positive {
+            color: #48bb78;
+        }
+
+        .metric-value.warning {
+            color: #ed8936;
+        }
+
+        .metric-value.negative {
+            color: #f56565;
+        }
+
+        .metric-detail {
+            font-size: 14px;
+            color: #a0aec0;
+            margin-top: 4px;
+        }
+
+        /* Navigation Arrows */
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-arrow:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-arrow.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .nav-arrow.left {
+            left: 30px;
+        }
+
+        .nav-arrow.right {
+            right: 30px;
+        }
+
+        .nav-arrow svg {
+            width: 30px;
+            height: 30px;
+            fill: #2d3748;
+        }
+
+        /* Slide Counter */
+        .slide-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Navigation Dots */
+        .nav-dots {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 12px;
+            z-index: 1000;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: white;
+            transform: scale(1.5);
+        }
+
+        .dot:hover {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-title {
+                font-size: 48px;
+            }
+            
+            .slide {
+                padding: 40px 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 36px;
+            }
+            
+            .subtitle {
+                font-size: 24px;
+            }
+            
+            .slide-title {
+                font-size: 32px;
+            }
+            
+            .slide {
+                padding: 30px 20px;
+            }
+
+            .nav-arrow {
+                width: 50px;
+                height: 50px;
+            }
+
+            .nav-arrow.left {
+                left: 15px;
+            }
+
+            .nav-arrow.right {
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-wrapper">
+        <div class="slides-container" id="slidesContainer">
+            <!-- Slide 1: Title -->
+            <div class="slide slide-1">
+                <div class="title-content">
+                    <h1 class="main-title">📊 Monthly Report<br>Bekasi Team</h1>
+                    <p class="subtitle">Performance Analysis</p>
+                    <p class="date-info">September 2025</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: Revenue Performance -->
+            <div class="slide slide-2">
+                <div class="slide-header">
+                    <h2 class="slide-title">💰 Revenue Performance</h2>
+                    <p class="slide-subtitle">Target vs Omset Achievement</p>
+                </div>
+                
+                <div class="content-wrapper">
+                    <div class="info-cards">
+                        <div class="card jatibening">
+                            <h3 class="card-title">Jatibening</h3>
+                            <div class="card-metric">
+                                <span class="metric-label">Achievement:</span>
+                                <span class="metric-value positive">116.93%</span>
+                            </div>
+                            <div class="metric-detail">Rp 257,235,994 / Rp 220,000,000</div>
+                        </div>
+                        
+                        <div class="card summarecon">
+                            <h3 class="card-title">Summarecon</h3>
+                            <div class="card-metric">
+                                <span class="metric-label">Achievement:</span>
+                                <span class="metric-value positive">176.99%</span>
+                            </div>
+                            <div class="metric-detail">Rp 371,689,208 / Rp 210,000,000</div>
+                        </div>
+                        
+                        <div class="card cikarang">
+                            <h3 class="card-title">Cikarang</h3>
+                            <div class="card-metric">
+                                <span class="metric-label">Achievement:</span>
+                                <span class="metric-value positive">123.57%</span>
+                            </div>
+                            <div class="metric-detail">Rp 148,283,860 / Rp 120,000,000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Profit Performance -->
+            <div class="slide slide-3">
+                <div class="slide-header">
+                    <h2 class="slide-title">📈 Profit Analysis</h2>
+                    <p class="slide-subtitle">Target vs Profit Achievement</p>
+                </div>
+                
+                <div class="content-wrapper">
+                    <div class="info-cards">
+                        <div class="card jatibening">
+                            <h3 class="card-title">Jatibening</h3>
+                            <div class="card-metric">
+                                <span class="metric-label">Achievement:</span>
+                                <span class="metric-value positive">104.01%</span>
+                            </div>
+                            <div class="metric-detail">Rp 93,609,751 / Rp 90,000,000</div>
+                        </div>
+                        
+                        <div class="card summarecon">
+                            <h3 class="card-title">Summarecon</h3>
+                            <div class="card-metric">
+                                <span class="metric-label">Achievement:</span>
+                                <span class="metric-value positive">223.05%</span>
+                            </div>
+                            <div class="metric-detail">Rp 156,134,687 / Rp 70,000,000</div>
+                        </div>
+                        
+                        <div class="card cikarang">
+                            <h3 class="card-title">Cikarang</h3>
+                            <div class="card-metric">
+                                <span class="metric-label">Achievement:</span>
+                                <span class="metric-value warning">97.48%</span>
+                            </div>
+                            <div class="metric-detail">Rp 37,936,060 / Rp 38,900,000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Expenses Comparison -->
+            <div class="slide slide-4">
+                <div class="slide-header">
+                    <h2 class="slide-title">💸 Expenses Comparison</h2>
+                    <p class="slide-subtitle">August vs September 2025</p>
+                </div>
+                
+                <div class="content-wrapper">
+                    <div class="info-cards">
+                        <div class="card jatibening">
+                            <h3 class="card-title">Jatibening</h3>
+                            <div class="metric-detail" style="margin-bottom: 8px;">Aug: Rp 185.9M → Sep: Rp 163.6M</div>
+                            <div class="card-metric">
+                                <span class="metric-label">Change:</span>
+                                <span class="metric-value positive">-11.97%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card summarecon">
+                            <h3 class="card-title">Summarecon</h3>
+                            <div class="metric-detail" style="margin-bottom: 8px;">Aug: Rp 173.6M → Sep: Rp 215.6M</div>
+                            <div class="card-metric">
+                                <span class="metric-label">Change:</span>
+                                <span class="metric-value negative">+24.14%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card cikarang">
+                            <h3 class="card-title">Cikarang</h3>
+                            <div class="metric-detail" style="margin-bottom: 8px;">Aug: Rp 123.9M → Sep: Rp 148.3M</div>
+                            <div class="card-metric">
+                                <span class="metric-label">Change:</span>
+                                <span class="metric-value negative">+19.67%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Sales Team Performance -->
+            <div class="slide slide-5">
+                <div class="slide-header">
+                    <h2 class="slide-title">👥 Sales Team Performance</h2>
+                    <p class="slide-subtitle">Individual Achievement September 2025</p>
+                </div>
+                
+                <div class="content-wrapper">
+                    <div class="info-cards" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 1100px;">
+                        <div class="card jatibening">
+                            <h3 class="card-title">Nadya</h3>
+                            <div class="card-metric">
+                                <span class="metric-label">Achievement:</span>
+                                <span class="metric-value positive">172.02%</span>
+                            </div>
+                            <div class="metric-detail">Rp 154,821,899 / Rp 90,000,000</div>
+                        </div>
+                        
+                        <div class="card jatibening">
+                            <h3 class="card-title">Rafi</h3>
+                            <div class="card-metric">
+                                <span class="metric-label">Achievement:</span>
+                                <span class="metric-value positive">164.28%</span>
+                            </div>
+                            <div class="metric-detail">Rp 147,849,855 / Rp 90,000,000</div>
+                        </div>
+                        
+                        <div class="card jatibening">
+                            <h3 class="card-title">Amalia</h3>
+                            <div class="card-metric">
+                                <span class="metric-label">Achievement:</span>
+                                <span class="metric-value positive">176.43%</span>
+                            </div>
+                            <div class="metric-detail">Rp 158,785,933 / Rp 90,000,000</div>
+                        </div>
+                        
+                        <div class="card jatibening">
+                            <h3 class="card-title">Cemara</h3>
+                            <div class="card-metric">
+                                <span class="metric-label">Achievement:</span>
+                                <span class="metric-value positive">108.97%</span>
+                            </div>
+                            <div class="metric-detail">Rp 65,382,038 / Rp 60,000,000</div>
+                        </div>
+                        
+                        <div class="card jatibening">
+                            <h3 class="card-title">Zul</h3>
+                            <div class="card-metric">
+                                <span class="metric-label">Achievement:</span>
+                                <span class="metric-value positive">114.50%</span>
+                            </div>
+                            <div class="metric-detail">Rp 68,698,331 / Rp 60,000,000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: After Sales Team Performance -->
+            <div class="slide slide-6">
+                <div class="slide-header">
+                    <h2 class="slide-title">🔧 After Sales Team Performance</h2>
+                    <p class="slide-subtitle">Individual Achievement September 2025</p>
+                </div>
+                
+                <div class="content-wrapper">
+                    <div class="info-cards">
+                        <div class="card cikarang">
+                            <h3 class="card-title">Dian</h3>
+                            <div class="card-metric">
+                                <span class="metric-label">Achievement:</span>
+                                <span class="metric-value warning">52.83%</span>
+                            </div>
+                            <div class="metric-detail">Total: Rp 48,794,545 / Target: 58%</div>
+                        </div>
+                        
+                        <div class="card cikarang">
+                            <h3 class="card-title">Dhea</h3>
+                            <div class="card-metric">
+                                <span class="metric-label">Achievement:</span>
+                                <span class="metric-value warning">51.60%</span>
+                            </div>
+                            <div class="metric-detail">Total: Rp 55,701,262 / Target: 58%</div>
+                        </div>
+                        
+                        <div class="card cikarang">
+                            <h3 class="card-title">Nurul</h3>
+                            <div class="card-metric">
+                                <span class="metric-label">Achievement:</span>
+                                <span class="metric-value positive">63.16%</span>
+                            </div>
+                            <div class="metric-detail">Total: Rp 57,934,646 / Target: 58%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Jatibening - Transaction Overview -->
+            <div class="slide slide-7">
+                <div class="slide-header">
+                    <h2 class="slide-title">📊 Jatibening - Transaction Overview</h2>
+                    <p class="slide-subtitle">Student Registration & Package Type September 2025</p>
+                </div>
+                
+                <div class="content-wrapper">
+                    <div class="info-cards" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1100px;">
+                        <div class="card jatibening" style="padding: 30px;">
+                            <h3 class="card-title" style="font-size: 20px; margin-bottom: 15px;">📝 Registration Type</h3>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <span style="font-size: 16px; color: #4a5568;">New Students</span>
+                                <span style="font-size: 24px; font-weight: 700; color: #4299e1;">55</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <span style="font-size: 16px; color: #4a5568;">Renewals</span>
+                                <span style="font-size: 24px; font-weight: 700; color: #48bb78;">33</span>
+                            </div>
+                            <div style="border-top: 2px solid #e2e8f0; padding-top: 12px; margin-top: 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 18px; font-weight: 600; color: #2d3748;">Total Transactions</span>
+                                    <span style="font-size: 28px; font-weight: 800; color: #2d3748;">88</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card jatibening" style="padding: 30px;">
+                            <h3 class="card-title" style="font-size: 20px; margin-bottom: 15px;">🎓 Class Type</h3>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <div>
+                                    <div style="font-size: 16px; color: #4a5568;">Regular Class</div>
+                                    <div style="font-size: 13px; color: #a0aec0;">80.7% of total</div>
+                                </div>
+                                <span style="font-size: 24px; font-weight: 700; color: #4299e1;">71</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <div>
+                                    <div style="font-size: 16px; color: #4a5568;">Private Class</div>
+                                    <div style="font-size: 13px; color: #a0aec0;">19.3% of total</div>
+                                </div>
+                                <span style="font-size: 24px; font-weight: 700; color: #ed8936;">17</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Jatibening - Top Programs -->
+            <div class="slide slide-8">
+                <div class="slide-header">
+                    <h2 class="slide-title">🏆 Jatibening - Top Programs</h2>
+                    <p class="slide-subtitle">Most Popular Programs by Transaction Volume</p>
+                </div>
+                
+                <div class="content-wrapper">
+                    <div class="info-cards" style="max-width: 900px;">
+                        <div class="card jatibening" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; padding: 25px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-size: 36px; margin-bottom: 5px;">🥇</div>
+                                    <h3 style="font-size: 22px; font-weight: 700; color: white; margin-bottom: 5px;">English for Children</h3>
+                                    <p style="font-size: 14px; color: rgba(255,255,255,0.9);">Most popular program</p>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 42px; font-weight: 800; color: white;">27</div>
+                                    <div style="font-size: 18px; color: rgba(255,255,255,0.9);">30.7%</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card summarecon" style="border-left-color: #48bb78; padding: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    <div style="font-size: 32px;">🥈</div>
+                                    <div>
+                                        <h3 style="font-size: 20px; font-weight: 700; color: #2d3748;">English for Teenagers</h3>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 32px; font-weight: 700; color: #48bb78;">17</div>
+                                    <div style="font-size: 16px; color: #718096;">19.3%</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card cikarang" style="border-left-color: #ed8936; padding: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    <div style="font-size: 32px;">🥉</div>
+                                    <div>
+                                        <h3 style="font-size: 20px; font-weight: 700; color: #2d3748;">Speak On</h3>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 32px; font-weight: 700; color: #ed8936;">15</div>
+                                    <div style="font-size: 16px; color: #718096;">17.0%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Jatibening - Program by Class Type -->
+            <div class="slide slide-9">
+                <div class="slide-header">
+                    <h2 class="slide-title">📚 Jatibening - Program Breakdown</h2>
+                    <p class="slide-subtitle">Top Programs by Regular vs Private Class</p>
+                </div>
+                
+                <div class="content-wrapper">
+                    <div class="info-cards" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1100px;">
+                        <div class="card jatibening" style="padding: 25px;">
+                            <h3 class="card-title" style="font-size: 20px; margin-bottom: 18px; color: #4299e1;">📘 Regular Class (71)</h3>
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">English for Children</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">20</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">English for Teenagers</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">16</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Speak On</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">13</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">English for Preschool</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">8</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Others</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">14</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card cikarang" style="padding: 25px;">
+                            <h3 class="card-title" style="font-size: 20px; margin-bottom: 18px; color: #ed8936;">📙 Private Class (17)</h3>
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">English for Children</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">5</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">IELTS Pro</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">3</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Business English (BESC)</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">2</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Basic Communication</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">2</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Others</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: Summarecon - Transaction Overview -->
+            <div class="slide slide-10">
+                <div class="slide-header">
+                    <h2 class="slide-title">📊 Summarecon - Transaction Overview</h2>
+                    <p class="slide-subtitle">Student Registration & Package Type September 2025</p>
+                </div>
+                
+                <div class="content-wrapper">
+                    <div class="info-cards" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1100px;">
+                        <div class="card summarecon" style="padding: 30px;">
+                            <h3 class="card-title" style="font-size: 20px; margin-bottom: 15px;">📝 Registration Type</h3>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <span style="font-size: 16px; color: #4a5568;">New Students</span>
+                                <span style="font-size: 24px; font-weight: 700; color: #4299e1;">79</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <span style="font-size: 16px; color: #4a5568;">Renewals</span>
+                                <span style="font-size: 24px; font-weight: 700; color: #48bb78;">17</span>
+                            </div>
+                            <div style="border-top: 2px solid #e2e8f0; padding-top: 12px; margin-top: 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 18px; font-weight: 600; color: #2d3748;">Total Transactions</span>
+                                    <span style="font-size: 28px; font-weight: 800; color: #2d3748;">96</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card summarecon" style="padding: 30px;">
+                            <h3 class="card-title" style="font-size: 20px; margin-bottom: 15px;">🎓 Class Type</h3>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <div>
+                                    <div style="font-size: 16px; color: #4a5568;">Regular Class</div>
+                                    <div style="font-size: 13px; color: #a0aec0;">68.8% of total</div>
+                                </div>
+                                <span style="font-size: 24px; font-weight: 700; color: #4299e1;">66</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <div>
+                                    <div style="font-size: 16px; color: #4a5568;">Private Class</div>
+                                    <div style="font-size: 13px; color: #a0aec0;">31.2% of total</div>
+                                </div>
+                                <span style="font-size: 24px; font-weight: 700; color: #ed8936;">30</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Summarecon - Top Programs -->
+            <div class="slide slide-11">
+                <div class="slide-header">
+                    <h2 class="slide-title">🏆 Summarecon - Top Programs</h2>
+                    <p class="slide-subtitle">Most Popular Programs by Transaction Volume</p>
+                </div>
+                
+                <div class="content-wrapper">
+                    <div class="info-cards" style="max-width: 900px;">
+                        <div class="card summarecon" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%); border: none; padding: 25px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-size: 36px; margin-bottom: 5px;">🥇</div>
+                                    <h3 style="font-size: 22px; font-weight: 700; color: white; margin-bottom: 5px;">Speak On</h3>
+                                    <p style="font-size: 14px; color: rgba(255,255,255,0.9);">Dominant program - over half of all transactions!</p>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 42px; font-weight: 800; color: white;">52</div>
+                                    <div style="font-size: 18px; color: rgba(255,255,255,0.9);">54.2%</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card jatibening" style="border-left-color: #4299e1; padding: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    <div style="font-size: 32px;">🥈</div>
+                                    <div>
+                                        <h3 style="font-size: 20px; font-weight: 700; color: #2d3748;">Business English (BESC)</h3>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 32px; font-weight: 700; color: #4299e1;">10</div>
+                                    <div style="font-size: 16px; color: #718096;">10.4%</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card cikarang" style="border-left-color: #ed8936; padding: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    <div style="font-size: 32px;">🥉</div>
+                                    <div>
+                                        <h3 style="font-size: 20px; font-weight: 700; color: #2d3748;">English for Children</h3>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 32px; font-weight: 700; color: #ed8936;">9</div>
+                                    <div style="font-size: 16px; color: #718096;">9.4%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12: Summarecon - Program by Class Type -->
+            <div class="slide slide-12">
+                <div class="slide-header">
+                    <h2 class="slide-title">📚 Summarecon - Program Breakdown</h2>
+                    <p class="slide-subtitle">Top Programs by Regular vs Private Class</p>
+                </div>
+                
+                <div class="content-wrapper">
+                    <div class="info-cards" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1100px;">
+                        <div class="card summarecon" style="padding: 25px;">
+                            <h3 class="card-title" style="font-size: 20px; margin-bottom: 18px; color: #48bb78;">📘 Regular Class (66)</h3>
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Speak On</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">43</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">English for Children</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">8</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Business English (BESC)</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">5</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">IELTS Pro</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">4</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Others</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">6</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card cikarang" style="padding: 25px;">
+                            <h3 class="card-title" style="font-size: 20px; margin-bottom: 18px; color: #ed8936;">📙 Private Class (30)</h3>
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Speak On</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">7</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Basic Communication</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">6</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Business English (BESC)</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">5</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Active Communication</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">5</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Others</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">7</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 13: Cikarang - Transaction Overview -->
+            <div class="slide slide-13">
+                <div class="slide-header">
+                    <h2 class="slide-title">📊 Cikarang - Transaction Overview</h2>
+                    <p class="slide-subtitle">Student Registration & Package Type September 2025</p>
+                </div>
+                
+                <div class="content-wrapper">
+                    <div class="info-cards" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1100px;">
+                        <div class="card cikarang" style="padding: 30px;">
+                            <h3 class="card-title" style="font-size: 20px; margin-bottom: 15px;">📝 Registration Type</h3>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <span style="font-size: 16px; color: #4a5568;">New Students</span>
+                                <span style="font-size: 24px; font-weight: 700; color: #4299e1;">44</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <span style="font-size: 16px; color: #4a5568;">Renewals</span>
+                                <span style="font-size: 24px; font-weight: 700; color: #48bb78;">8</span>
+                            </div>
+                            <div style="border-top: 2px solid #e2e8f0; padding-top: 12px; margin-top: 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 18px; font-weight: 600; color: #2d3748;">Total Transactions</span>
+                                    <span style="font-size: 28px; font-weight: 800; color: #2d3748;">52</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card cikarang" style="padding: 30px;">
+                            <h3 class="card-title" style="font-size: 20px; margin-bottom: 15px;">🎓 Class Type</h3>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <div>
+                                    <div style="font-size: 16px; color: #4a5568;">Regular Class</div>
+                                    <div style="font-size: 13px; color: #a0aec0;">69.2% of total</div>
+                                </div>
+                                <span style="font-size: 24px; font-weight: 700; color: #4299e1;">36</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <div>
+                                    <div style="font-size: 16px; color: #4a5568;">Private Class</div>
+                                    <div style="font-size: 13px; color: #a0aec0;">30.8% of total</div>
+                                </div>
+                                <span style="font-size: 24px; font-weight: 700; color: #ed8936;">16</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 14: Cikarang - Top Programs -->
+            <div class="slide slide-14">
+                <div class="slide-header">
+                    <h2 class="slide-title">🏆 Cikarang - Top Programs</h2>
+                    <p class="slide-subtitle">Most Popular Programs by Transaction Volume</p>
+                </div>
+                
+                <div class="content-wrapper">
+                    <div class="info-cards" style="max-width: 900px;">
+                        <div class="card cikarang" style="background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%); border: none; padding: 25px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-size: 36px; margin-bottom: 5px;">🥇</div>
+                                    <h3 style="font-size: 22px; font-weight: 700; color: white; margin-bottom: 5px;">Speak On</h3>
+                                    <p style="font-size: 14px; color: rgba(255,255,255,0.9);">Extremely dominant - almost 2/3 of all transactions!</p>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 42px; font-weight: 800; color: white;">34</div>
+                                    <div style="font-size: 18px; color: rgba(255,255,255,0.9);">65.4%</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card jatibening" style="border-left-color: #4299e1; padding: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    <div style="font-size: 32px;">🥈</div>
+                                    <div>
+                                        <h3 style="font-size: 20px; font-weight: 700; color: #2d3748;">English for Children</h3>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 32px; font-weight: 700; color: #4299e1;">5</div>
+                                    <div style="font-size: 16px; color: #718096;">9.6%</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card summarecon" style="border-left-color: #48bb78; padding: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    <div style="font-size: 32px;">🥉</div>
+                                    <div>
+                                        <h3 style="font-size: 20px; font-weight: 700; color: #2d3748;">Basic Communication & IELTS Pro</h3>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 32px; font-weight: 700; color: #48bb78;">4</div>
+                                    <div style="font-size: 16px; color: #718096;">7.7% each</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 15: Cikarang - Program by Class Type -->
+            <div class="slide slide-15">
+                <div class="slide-header">
+                    <h2 class="slide-title">📚 Cikarang - Program Breakdown</h2>
+                    <p class="slide-subtitle">Top Programs by Regular vs Private Class</p>
+                </div>
+                
+                <div class="content-wrapper">
+                    <div class="info-cards" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1100px;">
+                        <div class="card cikarang" style="padding: 25px;">
+                            <h3 class="card-title" style="font-size: 20px; margin-bottom: 18px; color: #ed8936;">📘 Regular Class (36)</h3>
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Speak On</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">30</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">English for Children</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">4</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">English for Teenagers</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">1</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Business English (BESC)</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">1</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card cikarang" style="padding: 25px;">
+                            <h3 class="card-title" style="font-size: 20px; margin-bottom: 18px; color: #ed8936;">📙 Private Class (16)</h3>
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Speak On</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">4</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Basic Communication</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">3</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">IELTS Pro</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">3</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Active Communication</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">2</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                    <span style="font-size: 15px; color: #4a5568;">Others</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: #2d3748;">4</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 16: What We Have Done & What We Plan -->
+            <div class="slide slide-16">
+                <div class="slide-header">
+                    <h2 class="slide-title">🎯 Action Summary & Future Plans</h2>
+                    <p class="slide-subtitle">September 2025 Achievements & October Plans</p>
+                </div>
+                
+                <div class="content-wrapper">
+                    <div class="info-cards" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; max-width: 1100px;">
+                        <div class="card summarecon" style="padding: 30px; border-left-width: 8px;">
+                            <h3 class="card-title" style="font-size: 24px; margin-bottom: 20px; color: #48bb78;">✅ What We Have Done</h3>
+                            <div style="display: flex; flex-direction: column; gap: 15px;">
+                                <div style="display: flex; gap: 12px; align-items: start;">
+                                    <div style="min-width: 28px; height: 28px; background: #48bb78; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">1</div>
+                                    <p style="font-size: 16px; color: #2d3748; line-height: 1.5;">Pembangunan kelas baru di Rooftop Summarecon</p>
+                                </div>
+                                <div style="display: flex; gap: 12px; align-items: start;">
+                                    <div style="min-width: 28px; height: 28px; background: #48bb78; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">2</div>
+                                    <p style="font-size: 16px; color: #2d3748; line-height: 1.5;">Perizinan Operasional cabang Summarecon</p>
+                                </div>
+                                <div style="display: flex; gap: 12px; align-items: start;">
+                                    <div style="min-width: 28px; height: 28px; background: #48bb78; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">3</div>
+                                    <p style="font-size: 16px; color: #2d3748; line-height: 1.5;">Reshuffle Staff After Sales</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card jatibening" style="padding: 30px; border-left-width: 8px;">
+                            <h3 class="card-title" style="font-size: 24px; margin-bottom: 20px; color: #4299e1;">🎯 What We Plan</h3>
+                            <div style="display: flex; flex-direction: column; gap: 15px;">
+                                <div style="display: flex; gap: 12px; align-items: start;">
+                                    <div style="min-width: 28px; height: 28px; background: #4299e1; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">1</div>
+                                    <p style="font-size: 16px; color: #2d3748; line-height: 1.5;">Student Event Activatoin</p>
+                                </div>
+                                <div style="display: flex; gap: 12px; align-items: start;">
+                                    <div style="min-width: 28px; height: 28px; background: #4299e1; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">2</div>
+                                    <p style="font-size: 16px; color: #2d3748; line-height: 1.5;">AfterSales charting style</p>
+                                </div>
+                                <div style="display: flex; gap: 12px; align-items: start;">
+                                    <div style="min-width: 28px; height: 28px; background: #4299e1; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">3</div>
+                                    <p style="font-size: 16px; color: #2d3748; line-height: 1.5;">Revision Course Outline</p>
+                                </div>
+                                <div style="display: flex; gap: 12px; align-items: start;">
+                                    <div style="min-width: 28px; height: 28px; background: #4299e1; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">4</div>
+                                    <p style="font-size: 16px; color: #2d3748; line-height: 1.5;">SOP Template Reminder Message for After Sales</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <div class="nav-arrow left" id="prevBtn" onclick="previousSlide()">
+            <svg viewBox="0 0 24 24">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+        </div>
+        <div class="nav-arrow right" id="nextBtn" onclick="nextSlide()">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+        </div>
+
+        <!-- Slide Counter -->
+        <div class="slide-counter" id="slideCounter">1 / 16</div>
+
+        <!-- Navigation Dots -->
+        <div class="nav-dots">
+            <div class="dot active" onclick="goToSlide(0)"></div>
+            <div class="dot" onclick="goToSlide(1)"></div>
+            <div class="dot" onclick="goToSlide(2)"></div>
+            <div class="dot" onclick="goToSlide(3)"></div>
+            <div class="dot" onclick="goToSlide(4)"></div>
+            <div class="dot" onclick="goToSlide(5)"></div>
+            <div class="dot" onclick="goToSlide(6)"></div>
+            <div class="dot" onclick="goToSlide(7)"></div>
+            <div class="dot" onclick="goToSlide(8)"></div>
+            <div class="dot" onclick="goToSlide(9)"></div>
+            <div class="dot" onclick="goToSlide(10)"></div>
+            <div class="dot" onclick="goToSlide(11)"></div>
+            <div class="dot" onclick="goToSlide(12)"></div>
+            <div class="dot" onclick="goToSlide(13)"></div>
+            <div class="dot" onclick="goToSlide(14)"></div>
+            <div class="dot" onclick="goToSlide(15)"></div>
+        </div>
+    </div>
+
+    
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 16;
+        const slidesContainer = document.getElementById('slidesContainer');
+        const slideCounter = document.getElementById('slideCounter');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dots = document.querySelectorAll('.dot');
+
+        function updateSlidePosition() {
+            slidesContainer.style.transform = `translateX(-${currentSlide * 100}vw)`;
+            slideCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+
+            // Update arrow states
+            prevBtn.classList.toggle('disabled', currentSlide === 0);
+            nextBtn.classList.toggle('disabled', currentSlide === totalSlides - 1);
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlidePosition();
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlidePosition();
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlidePosition();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+        });
+
+        // Touch/Swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        slidesContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        slidesContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) previousSlide();
+        }
+
+        // Initial update
+        updateSlidePosition();
+    </script>
+</body>
+</html>
